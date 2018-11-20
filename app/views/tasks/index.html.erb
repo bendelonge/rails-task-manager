@@ -1,0 +1,29 @@
+<div class="col col-xs-12 col-sm-6 col-md-4">
+
+  <div class="title">
+    <h1>my tasks list</h1>
+  </div>
+  <div class="add-task">
+    <%= link_to '+', new_path %>
+  </div>
+    <% @tasks.each do |task| %>
+      <div class="task">
+        <% if task.completed %>
+          <input type="checkbox" id="<% task.id %>" name="<% task.id %>" checked>
+          <label class="task-title-done" for="<% task.id %>"><%= link_to task.title, task_path(task) %></label>
+        <% else %>
+          <%= link_to dotask_path(task), method: :post do %>
+            <input id="box1" type="checkbox" />
+          <% end %>
+          <label for="box1"><%= link_to task.title, task_path(task) %></label>
+        <% end  %>
+        <%= link_to raw('<i class="fa fa-eraser" aria-hidden="true"></i>'), task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>
+      </div>
+    <% end %>
+
+
+
+</div>
+
+
+
